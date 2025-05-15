@@ -1,451 +1,233 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-
+<html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>首页注册表单</title>
+  <title>注册页面（透明美化版）</title>
   <style>
-    .container {
-      max-width: 600px;
-      margin: 0 auto;
-      background-color: #fff;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    body {
+      background: url('https://i.postimg.cc/4351xv7f/cxstudy-1747312448116.jpg') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+    .register-box {
+      width: 420px; /* 更宽 */
+      margin: 80px auto;
+      padding: 36px 36px 24px 36px;
+      background: rgba(255,255,255,0.4);
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+      backdrop-filter: blur(8px);
     }
     
-    h1 {
+    .register-box h2 {
       text-align: center;
-      color: #2c3e50;
-      margin-bottom: 30px;
-    }
-    
-    .form-group {
-      margin-bottom: 20px;
-      position: relative;
-    }
-    
-    label {
-      display: block;
-      margin-bottom: 5px;
+      font-size: 2rem;
       font-weight: bold;
+      margin-bottom: 24px; /* 标题和下面间隔大一点 */
+      letter-spacing: 2px;
     }
     
-    input[type="text"],
-    input[type="email"],
-    input[type="password"],
-    input[type="tel"],
-    select,
-    textarea {
+    .input-group {
+      margin-bottom: 19px; /* 间隔更大 */
+    }
+    
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1rem;
+      color: #333;
+      font-weight: 500;
+    }
+    
+    .input-group input {
+      display: block;
       width: 100%;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 16px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
       box-sizing: border-box;
     }
     
-    textarea {
-      height: 100px;
-      resize: vertical;
-    }
-    
-    .error {
-      color: #e74c3c;
-      font-size: 14px;
-      margin-top: 5px;
-      display: none;
-      position: absolute;
-      left: 0;
-    }
-    
     button {
-      background-color: #3498db;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      font-size: 16px;
-      border-radius: 4px;
-      cursor: pointer;
       width: 100%;
-      transition: background-color 0.3s;
+      padding: 12px;
+      border: none;
+      border-radius: 24px;
+      background: linear-gradient(90deg, #a1c4fd 0%, #c2e9fb 100%);
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 8px;
+      box-shadow: 0 4px 12px rgba(161,196,253,0.3), 0 2px 4px rgba(0,0,0,0.08);
+      transition: transform 0.1s, box-shadow 0.1s;
     }
-    
     button:hover {
-      background-color: #2980b9;
-    }
-    
-    .success-message {
-      background-color: #2ecc71;
-      color: white;
-      padding: 15px;
-      border-radius: 4px;
-      margin-bottom: 20px;
-      display: none;
-    }
-    
-    .user-list {
-      margin-top: 30px;
-    }
-    
-    .user-card {
-      background-color: #f9f9f9;
-      padding: 15px;
-      border-radius: 4px;
-      margin-bottom: 10px;
-      border-left: 4px solid #3498db;
-    }
-    
-    .user-card h3 {
-      margin-top: 0;
-      color: #2c3e50;
-    }
-    
-    .user-card p {
-      margin: 5px 0;
-    }
-    
-    .required:after {
-      content: " *";
-      color: #e74c3c;
-    }
-    
-    .input-error {
-      border-color: #e74c3c !important;
+      background: linear-gradient(90deg, #fbc2eb 0%, #a6c1ee 100%);
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 8px 24px rgba(161,196,253,0.4), 0 4px 8px rgba(0,0,0,0.10);
     }
   </style>
 </head>
-
 <body>
-  <div class="container">
-    <div id="successMessage" class="success-message">
-      注册成功！您的信息已保存。
-    </div>
-    
-    <form id="registrationForm">
-      <div class="form-group">
-        <label for="username" class="required">用户名</label>
-        <input type="text" id="username" name="username" required>
-        <div id="usernameError" class="error">用户名必须为4-16个字符，只能包含字母和数字</div>
-      </div>
-      
-      <div class="form-group">
-        <label for="email" class="required">电子邮箱</label>
-        <input type="email" id="email" name="email" required>
-        <div id="emailError" class="error">请输入有效的电子邮箱地址</div>
-      </div>
-      
-      <div class="form-group">
-        <label for="phone">手机号码</label>
-        <input type="tel" id="phone" name="phone">
-        <div id="phoneError" class="error">请输入有效的11位手机号码</div>
-      </div>
-      
-      <div class="form-group">
-        <label for="password" class="required">密码</label>
-        <input type="password" id="password" name="password" required>
-        <div id="passwordError" class="error">密码必须至少8个字符，包含字母和数字</div>
-      </div>
-      
-      <div class="form-group">
-        <label for="confirmPassword" class="required">确认密码</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" required>
-        <div id="confirmPasswordError" class="error">两次输入的密码不一致</div>
-      </div>
-      
-      <div class="form-group">
-        <label for="gender">性别</label>
-        <select id="gender" name="gender">
-          <option value="">请选择</option>
-          <option value="male">男</option>
-          <option value="female">女</option>
-          <option value="other">其他</option>
-        </select>
-      </div>
-      
-      <div class="form-group">
-        <label for="birthdate">出生日期</label>
-        <input type="date" id="birthdate" name="birthdate">
-      </div>
-      
-      <div class="form-group">
-        <label for="interests">兴趣爱好（可多选）</label>
-        <div id="interests">
-          <label><input type="checkbox" name="interests" value="sports"> 运动</label>
-          <label><input type="checkbox" name="interests" value="music"> 音乐</label>
-          <label><input type="checkbox" name="interests" value="reading"> 阅读</label>
-          <label><input type="checkbox" name="interests" value="travel"> 旅行</label>
-          <label><input type="checkbox" name="interests" value="cooking"> 烹饪</label>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <label for="bio">个人简介</label>
-        <textarea id="bio" name="bio"></textarea>
-      </div>
-      
-      <div class="form-group">
-        <button type="submit" id="submitBtn">注册</button>
-      </div>
-    </form>
-    
-    <div id="userList" class="user-list">
-      <h2>已注册用户</h2>
-      <div id="usersContainer"></div>
-    </div>
+  <div class="register-box">
+    <h2>用户注册</h2>
+    <div id="form"></div>
+    <button onclick="register()">注册</button>
+    <div id="result"></div>
   </div>
-
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const form = document.getElementById('registrationForm');
-      const successMessage = document.getElementById('successMessage');
-      const usersContainer = document.getElementById('usersContainer');
-      
-      // 表单元素
-      const usernameInput = document.getElementById('username');
-      const emailInput = document.getElementById('email');
-      const phoneInput = document.getElementById('phone');
-      const passwordInput = document.getElementById('password');
-      const confirmPasswordInput = document.getElementById('confirmPassword');
-      
-      // 错误提示元素
-      const usernameError = document.getElementById('usernameError');
-      const emailError = document.getElementById('emailError');
-      const phoneError = document.getElementById('phoneError');
-      const passwordError = document.getElementById('passwordError');
-      const confirmPasswordError = document.getElementById('confirmPasswordError');
-      
-      // 从本地存储加载已注册用户
-      loadRegisteredUsers();
-      
-      // 实时验证用户名唯一性
-      usernameInput.addEventListener('blur', function() {
-        const username = this.value;
-        const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
-        
-        if (username.length >= 4) {
-          const isUnique = !users.some(user => user.username === username);
-          
-          if (!isUnique) {
-            usernameError.textContent = '该用户名已被使用';
-            showError(usernameInput, usernameError);
-          } else {
-            hideError(usernameInput, usernameError);
-          }
-        }
-      });
-      
-      // 实时验证用户名格式
-      usernameInput.addEventListener('input', function() {
-        const username = this.value;
-        const usernameRegex = /^[a-zA-Z0-9]{4,16}$/;
-        
-        if (!usernameRegex.test(username) && username.length > 0) {
-          usernameError.textContent = '用户名必须为4-16个字符，只能包含字母和数字';
-          showError(usernameInput, usernameError);
-        } else {
-          hideError(usernameInput, usernameError);
-        }
-      });
-      
-      // 实时验证邮箱格式
-      emailInput.addEventListener('input', function() {
-        const email = this.value;
-        const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-        
-        if (!emailRegex.test(email) && email.length > 0) {
-          emailError.textContent = '请输入有效的电子邮箱地址';
-          showError(emailInput, emailError);
-        } else {
-          hideError(emailInput, emailError);
-        }
-      });
-      
-      // 实时验证手机号格式
-      phoneInput.addEventListener('input', function() {
-        const phone = this.value;
-        const phoneRegex = /^1[0-9]{10}$/;
-        
-        if (phone.length > 0 && !phoneRegex.test(phone)) {
-          phoneError.textContent = '请输入有效的11位手机号码';
-          showError(phoneInput, phoneError);
-        } else {
-          hideError(phoneInput, phoneError);
-        }
-      });
-      
-      // 实时验证密码格式
-      passwordInput.addEventListener('input', function() {
-        const password = this.value;
-        const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d).{8,}$/;
-        
-        if (!passwordRegex.test(password) && password.length > 0) {
-          passwordError.textContent = '密码必须至少8个字符，包含字母和数字';
-          showError(passwordInput, passwordError);
-        } else {
-          hideError(passwordInput, passwordError);
-        }
-      });
-      
-      // 实时验证密码匹配
-      confirmPasswordInput.addEventListener('input', function() {
-        const password = passwordInput.value;
-        const confirmPassword = this.value;
-        
-        if (password !== confirmPassword && confirmPassword.length > 0) {
-          confirmPasswordError.textContent = '两次输入的密码不一致';
-          showError(confirmPasswordInput, confirmPasswordError);
-        } else {
-          hideError(confirmPasswordInput, confirmPasswordError);
-        }
-      });
-      
-      // 表单提交事件
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        if (validateForm()) {
-          // 收集表单数据
-          const userData = {
-            username: usernameInput.value,
-            email: emailInput.value,
-            phone: phoneInput.value,
-            password: passwordInput.value, // 实际应用中不应存储明文密码
-            gender: document.getElementById('gender').value,
-            birthdate: document.getElementById('birthdate').value,
-            interests: Array.from(document.querySelectorAll('input[name="interests"]:checked'))
-                            .map(checkbox => checkbox.value),
-            bio: document.getElementById('bio').value,
-            timestamp: new Date().toISOString()
-          };
-          
-          // 保存到本地存储
-          saveUser(userData);
-          
-          // 显示成功消息
-          successMessage.style.display = 'block';
-          
-          // 3秒后隐藏成功消息
-          setTimeout(() => {
-            successMessage.style.display = 'none';
-          }, 3000);
-          
-          // 重置表单
-          form.reset();
-          
-          // 刷新用户列表
-          loadRegisteredUsers();
-        }
-      });
-      
-      // 显示错误提示
-      function showError(inputElement, errorElement) {
-        inputElement.classList.add('input-error');
-        errorElement.style.display = 'block';
+    // 正则表达式提前编译
+    const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneReg = /^[0-9]{11}$/;
+
+    // 动态生成输入框
+    const fields = [
+      { id: 'username', label: '用户名', type: 'text' },
+      { id: 'password', label: '密码', type: 'password' },
+      { id: 'confirm', label: '确认密码', type: 'password' },
+      { id: 'email', label: '邮箱', type: 'text' },
+      { id: 'phone', label: '手机号', type: 'text' }
+    ];
+    const formDiv = document.getElementById('form');
+    fields.forEach(f => {
+      const group = document.createElement('div');
+      group.className = 'input-group';
+      group.innerHTML = `<label>${f.label}：</label>
+        <input id="${f.id}" type="${f.type}">
+        <span class="error" id="${f.id}Err"></span>`;
+      formDiv.appendChild(group);
+    });
+    // 密码强度显示
+    const strengthDiv = document.createElement('div');
+    strengthDiv.id = 'strength';
+    document.getElementById('password').after(strengthDiv);
+
+    // 校验函数
+    function validateUsername(u) {
+      if (!u) return '用户名不能为空';
+      if (/[^a-zA-Z0-9]/.test(u)) return '不能有符号';
+      if (u.length < 4 || u.length > 16) return '长度4-16位';
+      // 检查用户名是否已存在
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      if (users.some(user => user.username === u)) return '用户名已存在';
+      return '';
+    }
+    function validatePassword(p) {
+      if (!p) return '密码不能为空';
+      if (p.length < 8) return '至少8位';
+      if (!/[a-zA-Z]/.test(p) || !/[0-9]/.test(p)) return '需字母和数字';
+      return '';
+    }
+    function validateConfirmPassword(p, c) {
+      if (!c) return '请确认密码';
+      if (p !== c) return '两次密码不一致';
+      return '';
+    }
+    function validateEmail(e) {
+      if (!e) return '邮箱不能为空';
+      if (!emailReg.test(e)) return '邮箱格式错误';
+      return '';
+    }
+    function validatePhone(p) {
+      if (!p) return '手机号不能为空';
+      if (!phoneReg.test(p)) return '必须11位数字';
+      return '';
+    }
+
+    // 密码强度可视化
+    document.getElementById('password').addEventListener('input', function() {
+      const val = this.value;
+      const strength = getStrength(val);
+      const strengthDiv = document.getElementById('strength');
+      if (!val) {
+        strengthDiv.textContent = '';
+        return;
       }
-      
-      // 隐藏错误提示
-      function hideError(inputElement, errorElement) {
-        inputElement.classList.remove('input-error');
-        errorElement.style.display = 'none';
-      }
-      
-      // 表单验证
-      function validateForm() {
-        let isValid = true;
-        
-        // 验证用户名
-        const username = usernameInput.value;
-        const usernameRegex = /^[a-zA-Z0-9]{4,16}$/;
-        if (!usernameRegex.test(username)) {
-          usernameError.textContent = '用户名必须为4-16个字符，只能包含字母和数字';
-          showError(usernameInput, usernameError);
-          isValid = false;
-        }
-        
-        // 验证邮箱
-        const email = emailInput.value;
-        const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-        if (!emailRegex.test(email)) {
-          emailError.textContent = '请输入有效的电子邮箱地址';
-          showError(emailInput, emailError);
-          isValid = false;
-        } else {
-          hideError(emailInput, emailError);
-        }
-        
-        // 验证手机号（可选）
-        const phone = phoneInput.value;
-        const phoneRegex = /^1[0-9]{10}$/;
-        if (phone.length > 0 && !phoneRegex.test(phone)) {
-          phoneError.textContent = '请输入有效的11位手机号码';
-          showError(phoneInput, phoneError);
-          isValid = false;
-        } else {
-          hideError(phoneInput, phoneError);
-        }
-        
-        // 验证密码
-        const password = passwordInput.value;
-        const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d).{8,}$/;
-        if (!passwordRegex.test(password)) {
-          passwordError.textContent = '密码必须至少8个字符，包含字母和数字';
-          showError(passwordInput, passwordError);
-          isValid = false;
-        }
-        
-        // 验证确认密码
-        const confirmPassword = confirmPasswordInput.value;
-        if (password !== confirmPassword) {
-          confirmPasswordError.textContent = '两次输入的密码不一致';
-          showError(confirmPasswordInput, confirmPasswordError);
-          isValid = false;
-        }
-        
-        return isValid;
-      }
-      
-      // 保存用户到本地存储
-      function saveUser(userData) {
-        let users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
-        users.push(userData);
-        localStorage.setItem('registeredUsers', JSON.stringify(users));
-      }
-      
-      // 从本地存储加载用户并显示
-      function loadRegisteredUsers() {
-        const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
-        
-        if (users.length === 0) {
-          usersContainer.innerHTML = '<p>暂无注册用户</p>';
-          return;
-        }
-        
-        usersContainer.innerHTML = '';
-        
-        users.forEach(user => {
-          const userCard = document.createElement('div');
-          userCard.className = 'user-card';
-          
-          const interests = user.interests && user.interests.length > 0 ? 
-            `兴趣爱好: ${user.interests.join(', ')}` : '无兴趣爱好';
-          
-          userCard.innerHTML = `
-            <h3>${user.username}</h3>
-            <p><strong>邮箱:</strong> ${user.email}</p>
-            ${user.phone ? `<p><strong>手机号:</strong> ${user.phone}</p>` : ''}
-            <p><strong>性别:</strong> ${user.gender || '未选择'}</p>
-            <p><strong>出生日期:</strong> ${user.birthdate || '未提供'}</p>
-            <p>${interests}</p>
-            <p><strong>个人简介:</strong> ${user.bio || '无'}</p>
-            <p><small>注册时间: ${new Date(user.timestamp).toLocaleString()}</small></p>
-          `;
-          
-          usersContainer.appendChild(userCard);
-        });
+      if (strength === '强') {
+        strengthDiv.textContent = '密码强度：强';
+        strengthDiv.className = 'strong';
+      } else if (strength === '中') {
+        strengthDiv.textContent = '密码强度：中';
+        strengthDiv.className = 'medium';
+      } else {
+        strengthDiv.textContent = '密码强度：弱';
+        strengthDiv.className = 'weak';
       }
     });
+
+    function getStrength(pwd) {
+      let score = 0;
+      if (pwd.length >= 8) score++;
+      if (/[A-Z]/.test(pwd)) score++;
+      if (/[a-z]/.test(pwd)) score++;
+      if (/[0-9]/.test(pwd)) score++;
+      if (/[^a-zA-Z0-9]/.test(pwd)) score++;
+      if (score >= 4) return '强';
+      if (score >= 3) return '中';
+      return '弱';
+    }
+
+    // 注册并存储
+    function register() {
+      let ok = true;
+      const values = {};
+      // 校验
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const confirm = document.getElementById('confirm').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+
+      // 单独校验
+      const usernameErr = validateUsername(username);
+      document.getElementById('usernameErr').textContent = usernameErr;
+      if (usernameErr) ok = false;
+
+      const passwordErr = validatePassword(password);
+      document.getElementById('passwordErr').textContent = passwordErr;
+      if (passwordErr) ok = false;
+
+      const confirmErr = validateConfirmPassword(password, confirm);
+      document.getElementById('confirmErr').textContent = confirmErr;
+      if (confirmErr) ok = false;
+
+      const emailErr = validateEmail(email);
+      document.getElementById('emailErr').textContent = emailErr;
+      if (emailErr) ok = false;
+
+      const phoneErr = validatePhone(phone);
+      document.getElementById('phoneErr').textContent = phoneErr;
+      if (phoneErr) ok = false;
+
+      values.username = username;
+      values.password = password;
+      values.email = email;
+      values.phone = phone;
+
+      if (!ok) return;
+
+      // 存储到 users 数组
+      let users = JSON.parse(localStorage.getItem('users') || '[]');
+      users.push(values);
+      localStorage.setItem('users', JSON.stringify(users));
+      document.getElementById('result').textContent = '注册成功！';
+    }
+
+    // 页面加载时自动填充（仅填充最后一个用户）
+    window.onload = function() {
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      if (users.length > 0) {
+        const obj = users[users.length - 1];
+        fields.forEach(f => {
+          document.getElementById(f.id).value = obj[f.id] || '';
+        });
+        document.getElementById('result').textContent = '已自动填充上次注册信息';
+      }
+    }
   </script>
 </body>
 </html>
